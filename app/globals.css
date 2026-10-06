@@ -1,3 +1,477 @@
-:root{color-scheme:light dark;--bg:#101216;--panel:#181b20;--text:#f5f5f5;--muted:#aab2bf;--border:#303640;--button:#46546b}
-@media(prefers-color-scheme:light){:root{--bg:#f5f7fb;--panel:#fff;--text:#111827;--muted:#667085;--border:#d0d5dd;--button:#475467}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}main{max-width:1250px;margin:auto;padding:28px 16px 50px}.panel,.card{background:var(--panel);border:1px solid var(--border);border-radius:14px}.panel{padding:18px;margin:16px 0}.card{padding:15px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:end}.field{min-width:220px;flex:1}label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}input,button{min-height:44px;border:1px solid var(--border);border-radius:9px;padding:9px 11px;font:inherit}input{width:100%;background:var(--panel);color:var(--text)}button{cursor:pointer;font-weight:700}.primary{background:var(--button);color:#fff}.muted{color:var(--muted)}.mono{font-family:ui-monospace,monospace}.status{margin-top:12px}.wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:1100px}th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left;font-size:14px}th{color:var(--muted);font-size:12px;text-transform:uppercase}pre{white-space:pre-wrap;word-break:break-word;max-height:380px;overflow:auto;border:1px solid var(--border);border-radius:10px;padding:12px}.k{font-size:12px;color:var(--muted)}.v{font-size:22px;font-weight:700;margin-top:6px}
+:root {
+  --bg: #f8f8f8;
+  --surface: #ffffff;
+  --border: #d5d9d9;
+  --text: #0f1111;
+  --muted: #565959;
+  --brand: #006ce0;
+  --brand-soft: #e7f0fe;
+  --danger: #d13212;
+  --danger-soft: #fdf3f1;
+  --ok: #067d62;
+  --ok-soft: #e6f4f1;
+  --warn: #e77600;
+  --warn-soft: #fff1e0;
+
+  /* Amazon-style solid dark button (primary actions) - kept separate from
+     --brand (which is the link/active-tab blue) since Seller Central's
+     main action buttons are black, not blue. */
+  --btn-primary-bg: #0f1111;
+  --btn-primary-bg-hover: #232f3e;
+
+  /* Amazon Seller Central-style dark top bar */
+  --topbar-bg: #0f1111;
+  --topbar-bg-2: #232f3e;
+  --topbar-text: #f2f2f2;
+  --topbar-muted: #c4c9d0;
+  --topbar-border: #37475a;
+  --critical: #d13212;
+  --critical-soft: #fdf3f1;
+
+  /* Per dispute-status accent colors (tracking-number cell + row border) */
+  --status-neutral: #6b7280;
+  --status-neutral-soft: #eef0f3;
+  --status-amber: #a15c00;
+  --status-amber-soft: #fdf1dd;
+  --status-blue: #1a56c4;
+  --status-blue-soft: #e8f0fd;
+  --status-teal: #0e7c6b;
+  --status-teal-soft: #e3f6f2;
+  --status-green: #1a7f4b;
+  --status-green-soft: #e7f6ee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161a;
+    --surface: #1c1f26;
+    --border: #2b2f38;
+    --text: #eceef1;
+    --muted: #9aa1ac;
+    --brand: #5b9bff;
+    --brand-soft: #182842;
+    --danger: #ff6b60;
+    --danger-soft: #3a1f1e;
+    --ok: #35d0a6;
+    --ok-soft: #123430;
+    --warn: #f0b74b;
+    --warn-soft: #3a2c10;
+
+    --btn-primary-bg: #2f81f7;
+    --btn-primary-bg-hover: #4a90f2;
+
+    --topbar-bg: #0b0c0d;
+    --topbar-bg-2: #1a222c;
+    --topbar-text: #f2f2f2;
+    --topbar-muted: #a6acb5;
+    --topbar-border: #2e3a49;
+    --critical: #ff6b60;
+    --critical-soft: #3a1f1e;
+
+    --status-neutral: #9aa1ac;
+    --status-neutral-soft: #262a31;
+    --status-amber: #f0b74b;
+    --status-amber-soft: #3a2c10;
+    --status-blue: #6ea3ff;
+    --status-blue-soft: #182842;
+    --status-teal: #4fd0bb;
+    --status-teal-soft: #123430;
+    --status-green: #4fd88c;
+    --status-green-soft: #163628;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14161a;
+  --surface: #1c1f26;
+  --border: #2b2f38;
+  --text: #eceef1;
+  --muted: #9aa1ac;
+  --brand: #5b9bff;
+  --brand-soft: #182842;
+  --danger: #ff6b60;
+  --danger-soft: #3a1f1e;
+  --ok: #35d0a6;
+  --ok-soft: #123430;
+  --warn: #f0b74b;
+  --warn-soft: #3a2c10;
+
+  --btn-primary-bg: #2f81f7;
+  --btn-primary-bg-hover: #4a90f2;
+
+  --topbar-bg: #0b0c0d;
+  --topbar-bg-2: #1a222c;
+  --topbar-text: #f2f2f2;
+  --topbar-muted: #a6acb5;
+  --topbar-border: #2e3a49;
+  --critical: #ff6b60;
+  --critical-soft: #3a1f1e;
+
+  --status-neutral: #9aa1ac;
+  --status-neutral-soft: #262a31;
+  --status-amber: #f0b74b;
+  --status-amber-soft: #3a2c10;
+  --status-blue: #6ea3ff;
+  --status-blue-soft: #182842;
+  --status-teal: #4fd0bb;
+  --status-teal-soft: #123430;
+  --status-green: #4fd88c;
+  --status-green-soft: #163628;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+}
+
+.shell { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.brand { font-weight: 700; color: var(--text); text-decoration: none; font-size: 16px; }
+.topbar nav a {
+  margin-left: 20px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.topbar nav a:hover { color: var(--brand); }
+
+h1 { font-size: 20px; margin: 0 0 4px; }
+h2 { font-size: 16px; margin: 28px 0 10px; }
+p.sub { color: var(--muted); margin: 0 0 20px; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.card .n { font-size: 24px; font-weight: 700; }
+.card .l { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
+.card.danger .n { color: var(--danger); }
+.card.ok .n { color: var(--ok); }
+.card.warn .n { color: var(--warn); }
+.card-btn {
+  font: inherit;
+  width: 100%;
+  transition: box-shadow .12s, border-color .12s, transform .12s;
+}
+.card-btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); transform: translateY(-1px); }
+.card-btn:focus-visible { outline: 2px solid var(--brand, #006ce0); outline-offset: 2px; }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.toolbar .spacer { flex: 1; }
+
+button, .btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 7px 13px;
+  border-radius: 7px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+button:hover, .btn:hover { border-color: var(--brand); color: var(--brand); }
+button:disabled { opacity: .5; cursor: default; }
+button.primary { background: var(--btn-primary-bg); border-color: var(--btn-primary-bg); color: #fff; }
+button.primary:hover { background: var(--btn-primary-bg-hover); border-color: var(--btn-primary-bg-hover); color: #fff; opacity: 1; }
+button.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+button.danger:hover { opacity: .85; color: #fff; border-color: var(--danger); }
+
+/* Understated "Sil" link-button used in table rows - only turns red on
+   hover so it doesn't visually compete with the primary sync/save actions,
+   consistent with delete being a deliberate, confirmed action (see the
+   inline "Silinsin mi? Evet / Vazgeç" prompt it opens). */
+.btn-link-danger {
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
+  padding: 4px 8px;
+}
+.btn-link-danger:hover { color: var(--danger); border-color: var(--danger-soft); background: var(--danger-soft); }
+
+/* Same understated treatment as .btn-link-danger, for a non-destructive
+   link-styled action inside a table row (e.g. "İndir") - also usable on an
+   <a>, not just <button>, so it needs its own text-decoration/display reset. */
+.btn-link {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  padding: 4px 8px;
+  text-decoration: none;
+  font-size: inherit;
+}
+.btn-link:hover { color: var(--brand); border-color: var(--border); background: var(--surface); }
+
+input[type="text"], input[type="search"], input[type="password"], input[type="number"] {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  min-width: 220px;
+}
+
+.filters { display: flex; gap: 6px; }
+.filters button.active { background: var(--brand-soft); border-color: var(--brand); color: var(--brand); }
+.filters button { display: inline-flex; align-items: center; gap: 6px; }
+.filter-count {
+  background: var(--status-neutral-soft);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 9px;
+  line-height: 1.5;
+}
+.filters button.active .filter-count { background: var(--brand); color: #fff; }
+
+.pager button { min-width: 34px; padding: 6px 10px; }
+.pager button.active { background: var(--brand-soft); border-color: var(--brand); color: var(--brand); cursor: default; }
+.pager button:disabled { opacity: .45; cursor: not-allowed; }
+
+table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+thead th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--muted);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+thead th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+thead th.sortable:hover { color: var(--brand); }
+tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--bg); }
+.mono { font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.pill.danger { background: var(--danger-soft); color: var(--danger); }
+.pill.ok { background: var(--ok-soft); color: var(--ok); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.muted { background: var(--border); color: var(--muted); }
+
+.empty { padding: 40px 20px; text-align: center; color: var(--muted); }
+
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 46px 20px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--surface);
+  cursor: pointer;
+}
+.dropzone.drag { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); }
+
+.result-row { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.result-row:last-child { border-bottom: none; }
+
+select {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.note-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+details.raw summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+details.raw pre { max-height: 260px; overflow: auto; background: var(--bg); padding: 10px; border-radius: 8px; font-size: 11px; }
+
+/* ---------- Top bar (Amazon Seller Central style) ---------- */
+.topbar-dark {
+  background: var(--topbar-bg);
+  color: var(--topbar-text);
+  border-bottom: 1px solid var(--topbar-border);
+}
+.topbar-dark-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.topbar-dark .brand-block {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.topbar-dark .brand-company {
+  font-weight: 700;
+  color: var(--topbar-text);
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar-dark .brand-sep { color: var(--topbar-muted); }
+.topbar-dark .brand-app {
+  color: var(--topbar-muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar-dark .tb-spacer { flex: 1; }
+.topbar-dark .tb-icon-link {
+  color: var(--topbar-text);
+  text-decoration: none;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.topbar-dark .tb-icon-link:hover { background: rgba(255,255,255,0.08); }
+
+.subnav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.subnav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 4px;
+}
+.subnav a {
+  display: inline-block;
+  padding: 13px 4px;
+  margin-right: 26px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 3px solid transparent;
+}
+.subnav a:hover { color: var(--text); }
+.subnav a.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+/* ---------- Actions sidebar (Amazon "Actions" panel style) ---------- */
+.layout-with-sidebar {
+  display: grid;
+  grid-template-columns: 272px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .layout-with-sidebar { grid-template-columns: 1fr; }
+}
+.actions-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+.actions-panel-title .count-badge {
+  background: var(--critical);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 10px;
+}
+.action-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.action-card:hover { border-color: var(--brand); }
+.action-card .ac-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.action-card .ac-title { font-weight: 700; font-size: 13.5px; }
+.action-card .ac-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.action-card .ac-badge.critical { background: var(--critical-soft); color: var(--critical); }
+.action-card .ac-badge.medium { background: var(--warn-soft); color: var(--warn); }
+.action-card .ac-badge.ok { background: var(--ok-soft); color: var(--ok); }
+.action-card .ac-detail { color: var(--muted); font-size: 12.5px; }
+.action-card .ac-detail strong { color: var(--text); }
+.action-card.empty { cursor: default; color: var(--muted); font-size: 13px; }
+.action-card.empty:hover { border-color: var(--border); }
+
+/* ---------- Per-status tracking-number coloring ---------- */
+/* Border applied to the first cell (not the <tr>) so it renders reliably
+   under border-collapse: collapse across browsers. */
+tbody tr.status-accent-neutral > td:first-child { box-shadow: inset 3px 0 0 transparent; }
+tbody tr.status-accent-amber > td:first-child { box-shadow: inset 3px 0 0 var(--status-amber); }
+tbody tr.status-accent-blue > td:first-child { box-shadow: inset 3px 0 0 var(--status-blue); }
+tbody tr.status-accent-teal > td:first-child { box-shadow: inset 3px 0 0 var(--status-teal); }
+tbody tr.status-accent-green > td:first-child { box-shadow: inset 3px 0 0 var(--status-green); }
+
+.status-text-neutral { color: var(--status-neutral); }
+.status-text-amber { color: var(--status-amber); }
+.status-text-blue { color: var(--status-blue); }
+.status-text-teal { color: var(--status-teal); }
+.status-text-green { color: var(--status-green); }
+a.status-text-neutral, a.status-text-amber, a.status-text-blue, a.status-text-teal, a.status-text-green {
+  font-weight: 600;
+}

@@ -1,3 +1,0 @@
-import {extractInvoiceShipments} from "@/lib/invoice-parser";
-export const runtime="nodejs";
-export async function POST(request){try{const form=await request.formData(),files=form.getAll("invoices").filter(Boolean);if(!files.length)return Response.json({ok:false,message:"Upload at least one PDF."},{status:400});const rows=[],warnings=[];for(const file of files){try{rows.push(...await extractInvoiceShipments(Buffer.from(await file.arrayBuffer()),file.name))}catch(e){warnings.push(`${file.name}: ${e.message}`)}}return Response.json({ok:true,rows,warnings})}catch(e){return Response.json({ok:false,message:e.message||"Parse failed."},{status:500})}}

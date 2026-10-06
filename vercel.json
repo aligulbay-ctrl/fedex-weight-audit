@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "app/api/invoices/upload/route.js": { "maxDuration": 60 },
+    "app/api/sync/route.js": { "maxDuration": 60 },
+    "app/api/gmail/sync/route.js": { "maxDuration": 60 }
+  }
+}

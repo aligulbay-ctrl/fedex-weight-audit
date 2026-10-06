@@ -1,2 +1,0 @@
-import {parseFedExReport} from "@/lib/report-parser";
-export const runtime="nodejs";export async function POST(request){try{const form=await request.formData(),file=form.get("report");if(!file)return Response.json({ok:false,message:"Upload a FedEx CSV/XLS/XLSX report."},{status:400});const result=parseFedExReport(Buffer.from(await file.arrayBuffer()));return Response.json({ok:true,fileName:file.name,...result})}catch(e){return Response.json({ok:false,message:e.message||"Report parsing failed."},{status:500})}}
