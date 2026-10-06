@@ -475,3 +475,8 @@ tbody tr.status-accent-green > td:first-child { box-shadow: inset 3px 0 0 var(--
 a.status-text-neutral, a.status-text-amber, a.status-text-blue, a.status-text-teal, a.status-text-green {
   font-weight: 600;
 }
+
+/* Accepted weight disputes remain separate from settled refunds. */
+:root { --status-approved: var(--status-green); --status-approved-soft: var(--status-green-soft); }
+tbody tr.status-accent-approved > td { background: var(--status-approved-soft); }
+tbody tr.status-accent-approved > td:first-child { box-shadow: inset 3px 0 0 var(--status-approved); }

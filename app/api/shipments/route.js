@@ -91,8 +91,9 @@ export const GET = apiHandler(async (req) => {
     status: `CASE s.dispute_status
                 WHEN 'flagged' THEN 1
                 WHEN 'disputed' THEN 2
-                WHEN 'credit_note' THEN 3
-                WHEN 'resolved' THEN 4
+                WHEN 'approved' THEN 3
+                WHEN 'credit_note' THEN 4
+                WHEN 'resolved' THEN 5
                 ELSE 5
               END ASC, ABS(COALESCE(s.weight_diff_kg,0)) DESC, s.ship_date DESC NULLS LAST`,
     diff_desc: `ABS(COALESCE(s.weight_diff_kg,0)) DESC, s.ship_date DESC NULLS LAST`,
